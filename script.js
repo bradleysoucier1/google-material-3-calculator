@@ -12,19 +12,22 @@ class Calculator {
     }
 
     setupEventListeners() {
-        // Number buttons
-        document.querySelectorAll('[data-number]').forEach(btn => {
-            btn.addEventListener('click', () => this.handleNumber(btn.dataset.number));
-        });
+        // Wait for Material Web Components to be ready
+        customElements.whenDefined('md-filled-button').then(() => {
+            // Number buttons
+            document.querySelectorAll('[data-number]').forEach(btn => {
+                btn.addEventListener('click', () => this.handleNumber(btn.dataset.number));
+            });
 
-        // Operator buttons
-        document.querySelectorAll('[data-operator]').forEach(btn => {
-            btn.addEventListener('click', () => this.handleOperator(btn.dataset.operator));
-        });
+            // Operator buttons
+            document.querySelectorAll('[data-operator]').forEach(btn => {
+                btn.addEventListener('click', () => this.handleOperator(btn.dataset.operator));
+            });
 
-        // Function buttons
-        document.querySelectorAll('[data-action]').forEach(btn => {
-            btn.addEventListener('click', () => this.handleAction(btn.dataset.action));
+            // Function buttons
+            document.querySelectorAll('[data-action]').forEach(btn => {
+                btn.addEventListener('click', () => this.handleAction(btn.dataset.action));
+            });
         });
     }
 
@@ -218,7 +221,7 @@ class Calculator {
     }
 }
 
-// Initialize calculator when DOM is loaded
+// Initialize calculator
 document.addEventListener('DOMContentLoaded', () => {
     new Calculator();
 });
