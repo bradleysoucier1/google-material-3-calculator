@@ -1,29 +1,25 @@
 :root {
-    /* Primary Colors - Material 3 */
+    /* Material 3 Color Tokens - Light Mode */
     --md-sys-color-primary: #6750a4;
     --md-sys-color-on-primary: #ffffff;
     --md-sys-color-primary-container: #eaddff;
     --md-sys-color-on-primary-container: #21005e;
     
-    /* Secondary Colors */
     --md-sys-color-secondary: #625b71;
     --md-sys-color-on-secondary: #ffffff;
     --md-sys-color-secondary-container: #e8def8;
     --md-sys-color-on-secondary-container: #1e192b;
     
-    /* Tertiary Colors */
     --md-sys-color-tertiary: #7d5260;
     --md-sys-color-on-tertiary: #ffffff;
     --md-sys-color-tertiary-container: #ffd8e4;
     --md-sys-color-on-tertiary-container: #31111d;
     
-    /* Error Colors */
     --md-sys-color-error: #b3261e;
     --md-sys-color-on-error: #ffffff;
     --md-sys-color-error-container: #f9dedc;
     --md-sys-color-on-error-container: #410e0b;
     
-    /* Neutral Colors */
     --md-sys-color-background: #fffbfe;
     --md-sys-color-on-background: #1c1b1f;
     --md-sys-color-surface: #fffbfe;
@@ -31,56 +27,33 @@
     --md-sys-color-surface-variant: #e7e0ec;
     --md-sys-color-on-surface-variant: #49454e;
     
-    /* Outline Colors */
     --md-sys-color-outline: #79747e;
     --md-sys-color-outline-variant: #cac4d0;
-    
-    /* Typography Scale */
-    --md-sys-typescale-display-large-font-size: 57px;
-    --md-sys-typescale-display-large-font-weight: 400;
-    --md-sys-typescale-display-large-line-height: 64px;
-    
-    --md-sys-typescale-body-large-font-size: 16px;
-    --md-sys-typescale-body-large-font-weight: 500;
-    --md-sys-typescale-body-large-line-height: 24px;
-    
-    --md-sys-typescale-label-large-font-size: 14px;
-    --md-sys-typescale-label-large-font-weight: 500;
-    
-    /* Elevation (Shadow) Levels */
-    --md-sys-elevation-level-0: 0px 0px 0px rgba(0, 0, 0, 0);
-    --md-sys-elevation-level-1: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 2px rgba(0, 0, 0, 0.24);
-    --md-sys-elevation-level-2: 0px 3px 6px rgba(0, 0, 0, 0.15), 0px 2px 4px rgba(0, 0, 0, 0.12);
-    --md-sys-elevation-level-3: 0px 10px 20px rgba(0, 0, 0, 0.15), 0px 3px 6px rgba(0, 0, 0, 0.12);
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        /* Primary Colors - Dark Mode */
+        /* Material 3 Color Tokens - Dark Mode */
         --md-sys-color-primary: #d0bcff;
         --md-sys-color-on-primary: #371e55;
         --md-sys-color-primary-container: #4f378b;
         --md-sys-color-on-primary-container: #eaddff;
         
-        /* Secondary Colors - Dark Mode */
         --md-sys-color-secondary: #ccc7db;
         --md-sys-color-on-secondary: #332d41;
         --md-sys-color-secondary-container: #4a4458;
         --md-sys-color-on-secondary-container: #e8def8;
         
-        /* Tertiary Colors - Dark Mode */
         --md-sys-color-tertiary: #ffb3c1;
         --md-sys-color-on-tertiary: #492532;
         --md-sys-color-tertiary-container: #633b48;
         --md-sys-color-on-tertiary-container: #ffd8e4;
         
-        /* Error Colors - Dark Mode */
         --md-sys-color-error: #f2b8b5;
         --md-sys-color-on-error: #601410;
         --md-sys-color-error-container: #8c1d18;
         --md-sys-color-on-error-container: #f9dedc;
         
-        /* Neutral Colors - Dark Mode */
         --md-sys-color-background: #1c1b1f;
         --md-sys-color-on-background: #e6e1e6;
         --md-sys-color-surface: #1c1b1f;
@@ -88,7 +61,6 @@
         --md-sys-color-surface-variant: #49454e;
         --md-sys-color-on-surface-variant: #cac4d0;
         
-        /* Outline Colors - Dark Mode */
         --md-sys-color-outline: #938f99;
         --md-sys-color-outline-variant: #49454e;
     }
@@ -126,7 +98,9 @@ body {
     background-color: var(--md-sys-color-surface);
     border-radius: 28px;
     padding: 24px 16px;
-    box-shadow: var(--md-sys-elevation-level-3);
+    box-shadow: 
+        0px 10px 20px rgba(0, 0, 0, 0.15),
+        0px 3px 6px rgba(0, 0, 0, 0.12);
     transition: box-shadow 0.3s ease;
 }
 
@@ -168,133 +142,105 @@ body {
     gap: 8px;
 }
 
-.btn {
+/* Material Web Component Button Styling */
+md-filled-button {
+    --md-filled-button-container-height: auto;
+    --md-filled-button-container-color: var(--md-sys-color-primary-container);
+    --md-filled-button-label-text-color: var(--md-sys-color-on-primary-container);
+    --md-filled-button-label-text-font-size: 18px;
+    --md-filled-button-label-text-font-weight: 500;
+    
     aspect-ratio: 1 / 1;
-    border: none;
     border-radius: 12px;
-    font-size: 18px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: 'Roboto', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Roboto', sans-serif;
-    position: relative;
-    overflow: hidden;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     user-select: none;
 }
 
-/* Ripple effect */
-.btn::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.3);
-    transform: translate(-50%, -50%);
-    transition: width 0.6s, height 0.6s;
-}
-
-.btn:active::after {
-    width: 300px;
-    height: 300px;
+md-filled-button:focus {
+    outline: 2px solid var(--md-sys-color-primary);
+    outline-offset: 2px;
 }
 
 /* Number Buttons */
-.btn-number {
-    background-color: var(--md-sys-color-primary-container);
-    color: var(--md-sys-color-on-primary-container);
+md-filled-button.btn-number {
+    --md-filled-button-container-color: var(--md-sys-color-primary-container);
+    --md-filled-button-label-text-color: var(--md-sys-color-on-primary-container);
 }
 
-.btn-number:hover {
-    background-color: color-mix(in srgb, var(--md-sys-color-primary-container) 80%, black);
+md-filled-button.btn-number:hover {
+    --md-filled-button-container-color: color-mix(in srgb, var(--md-sys-color-primary-container) 80%, black);
 }
 
-.btn-number:active {
-    background-color: color-mix(in srgb, var(--md-sys-color-primary-container) 70%, black);
+md-filled-button.btn-number:active {
     transform: scale(0.98);
-}
-
-.btn-number:focus {
-    outline: 2px solid var(--md-sys-color-primary);
-    outline-offset: 2px;
 }
 
 /* Operator Buttons */
-.btn-operator {
-    background-color: var(--md-sys-color-primary);
-    color: var(--md-sys-color-on-primary);
+md-filled-button.btn-operator {
+    --md-filled-button-container-color: var(--md-sys-color-primary);
+    --md-filled-button-label-text-color: var(--md-sys-color-on-primary);
 }
 
-.btn-operator:hover {
-    background-color: color-mix(in srgb, var(--md-sys-color-primary) 90%, black);
+md-filled-button.btn-operator:hover {
+    --md-filled-button-container-color: color-mix(in srgb, var(--md-sys-color-primary) 90%, black);
 }
 
-.btn-operator:active {
-    background-color: color-mix(in srgb, var(--md-sys-color-primary) 80%, black);
+md-filled-button.btn-operator:active {
     transform: scale(0.98);
 }
 
-.btn-operator:focus {
+md-filled-button.btn-operator:focus {
     outline: 2px solid var(--md-sys-color-primary);
     outline-offset: 2px;
 }
 
-/* Function Buttons */
-.btn-function {
-    background-color: var(--md-sys-color-secondary-container);
-    color: var(--md-sys-color-on-secondary-container);
+/* Function Buttons (AC, DEL, %) */
+md-filled-button.btn-function {
+    --md-filled-button-container-color: var(--md-sys-color-secondary-container);
+    --md-filled-button-label-text-color: var(--md-sys-color-on-secondary-container);
 }
 
-.btn-function:hover {
-    background-color: color-mix(in srgb, var(--md-sys-color-secondary-container) 80%, black);
+md-filled-button.btn-function:hover {
+    --md-filled-button-container-color: color-mix(in srgb, var(--md-sys-color-secondary-container) 80%, black);
 }
 
-.btn-function:active {
-    background-color: color-mix(in srgb, var(--md-sys-color-secondary-container) 70%, black);
+md-filled-button.btn-function:active {
     transform: scale(0.98);
 }
 
-.btn-function:focus {
+md-filled-button.btn-function:focus {
     outline: 2px solid var(--md-sys-color-secondary);
     outline-offset: 2px;
 }
 
 /* Equals Button */
-.btn-equals {
-    background-color: var(--md-sys-color-tertiary);
-    color: var(--md-sys-color-on-tertiary);
-    font-size: 24px;
-    font-weight: 600;
+md-filled-button.btn-equals {
+    --md-filled-button-container-color: var(--md-sys-color-tertiary);
+    --md-filled-button-label-text-color: var(--md-sys-color-on-tertiary);
+    --md-filled-button-label-text-font-weight: 600;
+    --md-filled-button-label-text-font-size: 24px;
 }
 
-.btn-equals:hover {
-    background-color: color-mix(in srgb, var(--md-sys-color-tertiary) 90%, black);
+md-filled-button.btn-equals:hover {
+    --md-filled-button-container-color: color-mix(in srgb, var(--md-sys-color-tertiary) 90%, black);
 }
 
-.btn-equals:active {
-    background-color: color-mix(in srgb, var(--md-sys-color-tertiary) 80%, black);
+md-filled-button.btn-equals:active {
     transform: scale(0.98);
 }
 
-.btn-equals:focus {
+md-filled-button.btn-equals:focus {
     outline: 2px solid var(--md-sys-color-tertiary);
     outline-offset: 2px;
 }
 
 /* Zero Button Spans 2 Columns */
-.btn-zero {
+md-filled-button.btn-zero {
     grid-column: span 2;
-}
-
-/* Disabled State */
-.btn:disabled {
-    opacity: 0.38;
-    cursor: not-allowed;
 }
 
 /* Responsive Design */
@@ -313,8 +259,8 @@ body {
         gap: 6px;
     }
     
-    .btn {
-        font-size: 16px;
+    md-filled-button {
+        --md-filled-button-label-text-font-size: 16px;
     }
 }
 
@@ -341,44 +287,23 @@ body {
         gap: 4px;
     }
     
-    .btn {
-        font-size: 14px;
+    md-filled-button {
+        --md-filled-button-label-text-font-size: 14px;
         border-radius: 8px;
     }
 }
 
-/* Animation for button press */
-@keyframes buttonPress {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(0.95);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-.btn.pressed {
-    animation: buttonPress 0.2s ease;
-}
-
 /* Accessibility */
 @media (prefers-reduced-motion: reduce) {
-    .btn,
+    md-filled-button,
     .display,
     body {
-        transition: none;
-    }
-    
-    .btn::after {
         transition: none;
     }
 }
 
 /* Focus visible for keyboard navigation */
-.btn:focus-visible {
+md-filled-button:focus-visible {
     outline: 3px solid var(--md-sys-color-primary);
     outline-offset: 2px;
 }
