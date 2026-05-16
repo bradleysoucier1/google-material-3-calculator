@@ -1,13 +1,21 @@
 class Calculator {
     constructor() {
         this.display = document.getElementById('display');
+        this.historyList = document.getElementById('historyList');
+        this.historyToggle = document.getElementById('historyToggle');
+        this.historyPanel = document.getElementById('historyPanel');
+        this.clearHistoryBtn = document.getElementById('clearHistory');
+        
         this.currentValue = '0';
         this.previousValue = '';
         this.operation = null;
         this.shouldResetDisplay = false;
+        this.history = [];
         
         this.setupEventListeners();
         this.setupKeyboardSupport();
+        this.setupHistoryToggle();
+        this.loadHistory();
         this.updateDisplay();
     }
 
@@ -33,6 +41,18 @@ class Calculator {
 
     setupKeyboardSupport() {
         document.addEventListener('keydown', (e) => this.handleKeyboard(e));
+    }
+
+    setupHistoryToggle() {
+        this.historyToggle.addEventListener('click', () => {
+            this.historyPanel.classList.toggle('active');
+        });
+        
+        this.clearHistoryBtn.addEventListener('click', () => {
+            this.history = [];
+            this.historyList.innerHTML = '';
+            localStorage.removeItem('calculatorHistory');
+        });
     }
 
     handleKeyboard(e) {
@@ -161,17 +181,21 @@ class Calculator {
         const current = parseFloat(this.currentValue);
 
         let result;
+        let operationSymbol = this.operation;
 
         try {
             switch (this.operation) {
                 case '+':
                     result = prev + current;
+                    operationSymbol = '+';
                     break;
                 case '-':
                     result = prev - current;
+                    operationSymbol = '−';
                     break;
                 case '*':
                     result = prev * current;
+                    operationSymbol = '×';
                     break;
                 case '/':
                     if (current === 0) {
@@ -179,6 +203,7 @@ class Calculator {
                         return;
                     }
                     result = prev / current;
+                    operationSymbol = '÷';
                     break;
                 default:
                     return;
@@ -186,6 +211,10 @@ class Calculator {
 
             // Round to avoid floating point errors
             result = Math.round(result * 100000000) / 100000000;
+            
+            // Add to history
+            this.addToHistory(`${prev} ${operationSymbol} ${current} = ${result}`);
+            
             this.currentValue = String(result);
         } catch (e) {
             this.displayError();
@@ -204,16 +233,65 @@ class Calculator {
         this.shouldResetDisplay = true;
     }
 
+    addToHistory(entry) {
+        this.history.unshift(entry);
+        if (this.history.length > 10) {
+            this.history.pop();
+        }
+        this.saveHistory();
+        this.updateHistoryDisplay();
+    }
+
+    saveHistory() {
+        try {
+            localStorage.setItem('calculatorHistory', JSON.stringify(this.history));
+        } catch (e) {
+            console.warn('Failed to save history:', e);
+        }
+    }
+
+    loadHistory() {
+        try {
+            const saved = localStorage.getItem('calculatorHistory');
+            if (saved) {
+                this.history = JSON.parse(saved);
+                this.updateHistoryDisplay();
+            }
+        } catch (e) {
+            console.warn('Failed to load history:', e);
+        }
+    }
+
+    updateHistoryDisplay() {
+        this.historyList.innerHTML = '';
+        this.history.forEach(entry => {
+            const li = document.createElement('li');
+            li.textContent = entry;
+            li.addEventListener('click', () => {
+                const result = entry.split('=')[1].trim();
+                this.currentValue = result;
+                this.updateDisplay();
+                this.historyPanel.classList.remove('active');
+            });
+            this.historyList.appendChild(li);
+        });
+    }
+
     updateDisplay() {
         // Format large numbers with commas
         let displayValue = this.currentValue;
         
         if (displayValue !== 'Error' && !isNaN(displayValue) && displayValue !== '') {
             const number = parseFloat(displayValue);
-            if (number >= 1000 || number <= -1000) {
-                displayValue = new Intl.NumberFormat('en-US', {
-                    maximumFractionDigits: 10
-                }).format(number);
+            if (Math.abs(number) >= 1000 || (number !== 0 && Math.abs(number) < 0.001)) {
+                // Use scientific notation for very small numbers
+                if (Math.abs(number) < 0.001 && number !== 0) {
+                    displayValue = number.toExponential(6);
+                } else {
+                    displayValue = new Intl.NumberFormat('en-US', {
+                        maximumFractionDigits: 10
+                    }).format(number);
+                }
             }
         }
 
