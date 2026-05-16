@@ -4,48 +4,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Material 3 Calculator</title>
+    
+    <!-- Google Fonts for Roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Material Web Components via ESM -->
+    <script type="importmap">
+    {
+      "imports": {
+        "@material/web/": "https://esm.run/@material/web/"
+      }
+    }
+    </script>
+    
+    <script type="module">
+    import '@material/web/all.js';
+    import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
+    document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="calculator-container">
         <div class="calculator">
             <div class="display-section">
-                <input type="text" class="display" id="display" placeholder="0" readonly>
+                <input type="text" class="display md-typescale-display-small" id="display" placeholder="0" readonly>
             </div>
             
             <div class="buttons-grid">
-                <!-- Row 1 -->
-                <button class="btn btn-function" data-action="clear">AC</button>
-                <button class="btn btn-function" data-action="delete">DEL</button>
-                <button class="btn btn-function" data-action="percentage">%</button>
-                <button class="btn btn-operator" data-operator="/">÷</button>
+                <!-- Row 1: Functions -->
+                <md-filled-button class="btn-function" data-action="clear">AC</md-filled-button>
+                <md-filled-button class="btn-function" data-action="delete">DEL</md-filled-button>
+                <md-filled-button class="btn-function" data-action="percentage">%</md-filled-button>
+                <md-filled-button class="btn-operator" data-operator="/">÷</md-filled-button>
                 
                 <!-- Row 2 -->
-                <button class="btn btn-number" data-number="7">7</button>
-                <button class="btn btn-number" data-number="8">8</button>
-                <button class="btn btn-number" data-number="9">9</button>
-                <button class="btn btn-operator" data-operator="*">×</button>
+                <md-filled-button class="btn-number" data-number="7">7</md-filled-button>
+                <md-filled-button class="btn-number" data-number="8">8</md-filled-button>
+                <md-filled-button class="btn-number" data-number="9">9</md-filled-button>
+                <md-filled-button class="btn-operator" data-operator="*">×</md-filled-button>
                 
                 <!-- Row 3 -->
-                <button class="btn btn-number" data-number="4">4</button>
-                <button class="btn btn-number" data-number="5">5</button>
-                <button class="btn btn-number" data-number="6">6</button>
-                <button class="btn btn-operator" data-operator="-">−</button>
+                <md-filled-button class="btn-number" data-number="4">4</md-filled-button>
+                <md-filled-button class="btn-number" data-number="5">5</md-filled-button>
+                <md-filled-button class="btn-number" data-number="6">6</md-filled-button>
+                <md-filled-button class="btn-operator" data-operator="-">−</md-filled-button>
                 
                 <!-- Row 4 -->
-                <button class="btn btn-number" data-number="1">1</button>
-                <button class="btn btn-number" data-number="2">2</button>
-                <button class="btn btn-number" data-number="3">3</button>
-                <button class="btn btn-operator" data-operator="+">+</button>
+                <md-filled-button class="btn-number" data-number="1">1</md-filled-button>
+                <md-filled-button class="btn-number" data-number="2">2</md-filled-button>
+                <md-filled-button class="btn-number" data-number="3">3</md-filled-button>
+                <md-filled-button class="btn-operator" data-operator="+">+</md-filled-button>
                 
                 <!-- Row 5 -->
-                <button class="btn btn-number btn-zero" data-number="0">0</button>
-                <button class="btn btn-number" data-number=".">.</button>
-                <button class="btn btn-equals" data-action="equals">=</button>
+                <md-filled-button class="btn-number btn-zero" data-number="0">0</md-filled-button>
+                <md-filled-button class="btn-number" data-number=".">.</md-filled-button>
+                <md-filled-button class="btn-equals" data-action="equals">=</md-filled-button>
             </div>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js" type="module"></script>
 </body>
 </html>
