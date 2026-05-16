@@ -1,0 +1,384 @@
+:root {
+    /* Primary Colors - Material 3 */
+    --md-sys-color-primary: #6750a4;
+    --md-sys-color-on-primary: #ffffff;
+    --md-sys-color-primary-container: #eaddff;
+    --md-sys-color-on-primary-container: #21005e;
+    
+    /* Secondary Colors */
+    --md-sys-color-secondary: #625b71;
+    --md-sys-color-on-secondary: #ffffff;
+    --md-sys-color-secondary-container: #e8def8;
+    --md-sys-color-on-secondary-container: #1e192b;
+    
+    /* Tertiary Colors */
+    --md-sys-color-tertiary: #7d5260;
+    --md-sys-color-on-tertiary: #ffffff;
+    --md-sys-color-tertiary-container: #ffd8e4;
+    --md-sys-color-on-tertiary-container: #31111d;
+    
+    /* Error Colors */
+    --md-sys-color-error: #b3261e;
+    --md-sys-color-on-error: #ffffff;
+    --md-sys-color-error-container: #f9dedc;
+    --md-sys-color-on-error-container: #410e0b;
+    
+    /* Neutral Colors */
+    --md-sys-color-background: #fffbfe;
+    --md-sys-color-on-background: #1c1b1f;
+    --md-sys-color-surface: #fffbfe;
+    --md-sys-color-on-surface: #1c1b1f;
+    --md-sys-color-surface-variant: #e7e0ec;
+    --md-sys-color-on-surface-variant: #49454e;
+    
+    /* Outline Colors */
+    --md-sys-color-outline: #79747e;
+    --md-sys-color-outline-variant: #cac4d0;
+    
+    /* Typography Scale */
+    --md-sys-typescale-display-large-font-size: 57px;
+    --md-sys-typescale-display-large-font-weight: 400;
+    --md-sys-typescale-display-large-line-height: 64px;
+    
+    --md-sys-typescale-body-large-font-size: 16px;
+    --md-sys-typescale-body-large-font-weight: 500;
+    --md-sys-typescale-body-large-line-height: 24px;
+    
+    --md-sys-typescale-label-large-font-size: 14px;
+    --md-sys-typescale-label-large-font-weight: 500;
+    
+    /* Elevation (Shadow) Levels */
+    --md-sys-elevation-level-0: 0px 0px 0px rgba(0, 0, 0, 0);
+    --md-sys-elevation-level-1: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 2px rgba(0, 0, 0, 0.24);
+    --md-sys-elevation-level-2: 0px 3px 6px rgba(0, 0, 0, 0.15), 0px 2px 4px rgba(0, 0, 0, 0.12);
+    --md-sys-elevation-level-3: 0px 10px 20px rgba(0, 0, 0, 0.15), 0px 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Primary Colors - Dark Mode */
+        --md-sys-color-primary: #d0bcff;
+        --md-sys-color-on-primary: #371e55;
+        --md-sys-color-primary-container: #4f378b;
+        --md-sys-color-on-primary-container: #eaddff;
+        
+        /* Secondary Colors - Dark Mode */
+        --md-sys-color-secondary: #ccc7db;
+        --md-sys-color-on-secondary: #332d41;
+        --md-sys-color-secondary-container: #4a4458;
+        --md-sys-color-on-secondary-container: #e8def8;
+        
+        /* Tertiary Colors - Dark Mode */
+        --md-sys-color-tertiary: #ffb3c1;
+        --md-sys-color-on-tertiary: #492532;
+        --md-sys-color-tertiary-container: #633b48;
+        --md-sys-color-on-tertiary-container: #ffd8e4;
+        
+        /* Error Colors - Dark Mode */
+        --md-sys-color-error: #f2b8b5;
+        --md-sys-color-on-error: #601410;
+        --md-sys-color-error-container: #8c1d18;
+        --md-sys-color-on-error-container: #f9dedc;
+        
+        /* Neutral Colors - Dark Mode */
+        --md-sys-color-background: #1c1b1f;
+        --md-sys-color-on-background: #e6e1e6;
+        --md-sys-color-surface: #1c1b1f;
+        --md-sys-color-on-surface: #e6e1e6;
+        --md-sys-color-surface-variant: #49454e;
+        --md-sys-color-on-surface-variant: #cac4d0;
+        
+        /* Outline Colors - Dark Mode */
+        --md-sys-color-outline: #938f99;
+        --md-sys-color-outline-variant: #49454e;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: var(--md-sys-color-background);
+    color: var(--md-sys-color-on-background);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 16px;
+}
+
+.calculator-container {
+    width: 100%;
+    max-width: 340px;
+}
+
+.calculator {
+    background-color: var(--md-sys-color-surface);
+    border-radius: 28px;
+    padding: 24px 16px;
+    box-shadow: var(--md-sys-elevation-level-3);
+    transition: box-shadow 0.3s ease;
+}
+
+.display-section {
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.display {
+    width: 100%;
+    background-color: var(--md-sys-color-surface-variant);
+    border: 1px solid var(--md-sys-color-outline-variant);
+    border-radius: 12px;
+    padding: 24px 16px;
+    font-size: 32px;
+    font-weight: 500;
+    text-align: right;
+    color: var(--md-sys-color-on-surface);
+    font-family: 'Roboto Mono', monospace;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.display:focus {
+    border-color: var(--md-sys-color-primary);
+    box-shadow: 0 0 0 3px rgba(103, 80, 164, 0.1);
+}
+
+.display::placeholder {
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+.buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 8px;
+}
+
+.btn {
+    aspect-ratio: 1 / 1;
+    border: none;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+}
+
+/* Ripple effect */
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:active::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* Number Buttons */
+.btn-number {
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+}
+
+.btn-number:hover {
+    background-color: color-mix(in srgb, var(--md-sys-color-primary-container) 80%, black);
+}
+
+.btn-number:active {
+    background-color: color-mix(in srgb, var(--md-sys-color-primary-container) 70%, black);
+    transform: scale(0.98);
+}
+
+.btn-number:focus {
+    outline: 2px solid var(--md-sys-color-primary);
+    outline-offset: 2px;
+}
+
+/* Operator Buttons */
+.btn-operator {
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+}
+
+.btn-operator:hover {
+    background-color: color-mix(in srgb, var(--md-sys-color-primary) 90%, black);
+}
+
+.btn-operator:active {
+    background-color: color-mix(in srgb, var(--md-sys-color-primary) 80%, black);
+    transform: scale(0.98);
+}
+
+.btn-operator:focus {
+    outline: 2px solid var(--md-sys-color-primary);
+    outline-offset: 2px;
+}
+
+/* Function Buttons */
+.btn-function {
+    background-color: var(--md-sys-color-secondary-container);
+    color: var(--md-sys-color-on-secondary-container);
+}
+
+.btn-function:hover {
+    background-color: color-mix(in srgb, var(--md-sys-color-secondary-container) 80%, black);
+}
+
+.btn-function:active {
+    background-color: color-mix(in srgb, var(--md-sys-color-secondary-container) 70%, black);
+    transform: scale(0.98);
+}
+
+.btn-function:focus {
+    outline: 2px solid var(--md-sys-color-secondary);
+    outline-offset: 2px;
+}
+
+/* Equals Button */
+.btn-equals {
+    background-color: var(--md-sys-color-tertiary);
+    color: var(--md-sys-color-on-tertiary);
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.btn-equals:hover {
+    background-color: color-mix(in srgb, var(--md-sys-color-tertiary) 90%, black);
+}
+
+.btn-equals:active {
+    background-color: color-mix(in srgb, var(--md-sys-color-tertiary) 80%, black);
+    transform: scale(0.98);
+}
+
+.btn-equals:focus {
+    outline: 2px solid var(--md-sys-color-tertiary);
+    outline-offset: 2px;
+}
+
+/* Zero Button Spans 2 Columns */
+.btn-zero {
+    grid-column: span 2;
+}
+
+/* Disabled State */
+.btn:disabled {
+    opacity: 0.38;
+    cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 400px) {
+    .calculator {
+        padding: 16px 12px;
+        border-radius: 24px;
+    }
+    
+    .display {
+        padding: 16px 12px;
+        font-size: 28px;
+    }
+    
+    .buttons-grid {
+        gap: 6px;
+    }
+    
+    .btn {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 320px) {
+    body {
+        padding: 8px;
+    }
+    
+    .calculator {
+        padding: 12px 8px;
+        border-radius: 20px;
+    }
+    
+    .display {
+        padding: 12px 8px;
+        font-size: 24px;
+    }
+    
+    .display-section {
+        margin-bottom: 16px;
+    }
+    
+    .buttons-grid {
+        gap: 4px;
+    }
+    
+    .btn {
+        font-size: 14px;
+        border-radius: 8px;
+    }
+}
+
+/* Animation for button press */
+@keyframes buttonPress {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.95);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.btn.pressed {
+    animation: buttonPress 0.2s ease;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .btn,
+    .display,
+    body {
+        transition: none;
+    }
+    
+    .btn::after {
+        transition: none;
+    }
+}
+
+/* Focus visible for keyboard navigation */
+.btn:focus-visible {
+    outline: 3px solid var(--md-sys-color-primary);
+    outline-offset: 2px;
+}
