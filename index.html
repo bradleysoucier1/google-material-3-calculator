@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Material 3 Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Google Calculator</title>
     
     <!-- Google Fonts for Roboto -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
     
     <!-- Material Web Components via ESM -->
     <script type="importmap">
@@ -26,41 +26,71 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="calculator-container">
-        <div class="calculator">
-            <div class="display-section">
-                <input type="text" class="display md-typescale-display-small" id="display" placeholder="0" readonly>
+    <div class="app-container">
+        <!-- Header -->
+        <div class="app-header">
+            <h1>Calculator</h1>
+            <button class="history-btn" id="historyToggle" aria-label="View calculation history" title="History">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- History Panel -->
+        <div class="history-panel" id="historyPanel">
+            <div class="history-header">
+                <h2>History</h2>
+                <button class="clear-history-btn" id="clearHistory" aria-label="Clear history" title="Clear">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                        <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-9l-1 1H5v2h14V4z"/>
+                    </svg>
+                </button>
             </div>
-            
-            <div class="buttons-grid">
-                <!-- Row 1: Functions -->
-                <md-filled-button class="btn-function" data-action="clear">AC</md-filled-button>
-                <md-filled-button class="btn-function" data-action="delete">DEL</md-filled-button>
-                <md-filled-button class="btn-function" data-action="percentage">%</md-filled-button>
-                <md-filled-button class="btn-operator" data-operator="/">÷</md-filled-button>
+            <ul class="history-list" id="historyList"></ul>
+        </div>
+
+        <!-- Calculator Container -->
+        <div class="calculator-container">
+            <div class="calculator">
+                <div class="display-section">
+                    <input type="text" class="display" id="display" placeholder="0" readonly>
+                </div>
                 
-                <!-- Row 2 -->
-                <md-filled-button class="btn-number" data-number="7">7</md-filled-button>
-                <md-filled-button class="btn-number" data-number="8">8</md-filled-button>
-                <md-filled-button class="btn-number" data-number="9">9</md-filled-button>
-                <md-filled-button class="btn-operator" data-operator="*">×</md-filled-button>
-                
-                <!-- Row 3 -->
-                <md-filled-button class="btn-number" data-number="4">4</md-filled-button>
-                <md-filled-button class="btn-number" data-number="5">5</md-filled-button>
-                <md-filled-button class="btn-number" data-number="6">6</md-filled-button>
-                <md-filled-button class="btn-operator" data-operator="-">−</md-filled-button>
-                
-                <!-- Row 4 -->
-                <md-filled-button class="btn-number" data-number="1">1</md-filled-button>
-                <md-filled-button class="btn-number" data-number="2">2</md-filled-button>
-                <md-filled-button class="btn-number" data-number="3">3</md-filled-button>
-                <md-filled-button class="btn-operator" data-operator="+">+</md-filled-button>
-                
-                <!-- Row 5 -->
-                <md-filled-button class="btn-number btn-zero" data-number="0">0</md-filled-button>
-                <md-filled-button class="btn-number" data-number=".">.</md-filled-button>
-                <md-filled-button class="btn-equals" data-action="equals">=</md-filled-button>
+                <div class="buttons-grid">
+                    <!-- Row 1: Functions -->
+                    <md-filled-button class="btn-ac" data-action="clear">AC</md-filled-button>
+                    <md-filled-button class="btn-delete" data-action="delete">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                            <path d="M22 3H7c-.69 0-1.23.35-1.59.88L0 12l5.41 8.11c.36.53.9.89 1.59.89h15c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H7.07L2.58 12l4.49-7H22v14zm-4-4l-4-4v8h-2v-8l-4 4H8l6-6 6 6h-2z"/>
+                        </svg>
+                    </md-filled-button>
+                    <md-filled-button class="btn-percent" data-action="percentage">%</md-filled-button>
+                    <md-filled-button class="btn-operator btn-divide" data-operator="/">÷</md-filled-button>
+                    
+                    <!-- Row 2 -->
+                    <md-filled-button class="btn-number" data-number="7">7</md-filled-button>
+                    <md-filled-button class="btn-number" data-number="8">8</md-filled-button>
+                    <md-filled-button class="btn-number" data-number="9">9</md-filled-button>
+                    <md-filled-button class="btn-operator btn-multiply" data-operator="*">×</md-filled-button>
+                    
+                    <!-- Row 3 -->
+                    <md-filled-button class="btn-number" data-number="4">4</md-filled-button>
+                    <md-filled-button class="btn-number" data-number="5">5</md-filled-button>
+                    <md-filled-button class="btn-number" data-number="6">6</md-filled-button>
+                    <md-filled-button class="btn-operator btn-minus" data-operator="-">−</md-filled-button>
+                    
+                    <!-- Row 4 -->
+                    <md-filled-button class="btn-number" data-number="1">1</md-filled-button>
+                    <md-filled-button class="btn-number" data-number="2">2</md-filled-button>
+                    <md-filled-button class="btn-number" data-number="3">3</md-filled-button>
+                    <md-filled-button class="btn-operator btn-plus" data-operator="+">+</md-filled-button>
+                    
+                    <!-- Row 5 -->
+                    <md-filled-button class="btn-number btn-zero" data-number="0">0</md-filled-button>
+                    <md-filled-button class="btn-number" data-number=".">.</md-filled-button>
+                    <md-filled-button class="btn-equals" data-action="equals">=</md-filled-button>
+                </div>
             </div>
         </div>
     </div>
